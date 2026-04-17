@@ -28,7 +28,7 @@
 
 
             <form action="{{ route('login') }}" method="POST">
-            @csrf
+                @csrf
 
 
                 {{-- Email --}}

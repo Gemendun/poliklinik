@@ -19,7 +19,17 @@ class PasienController extends Controller
     {
         return view('admin.pasien.create');
     }
+    
+public function get()
+{
+    // Mengambil semua poli beserta dokter dan jadwalnya
+    $polis = \App\Models\Poli::all();
+    
+    // Ambil SEMUA jadwal yang tersedia di sistem
+    $jadwals = \App\Models\JadwalPeriksa::with('dokter.poli')->get();
 
+    return view('pasien.daftar', compact('polis', 'jadwals'));
+}
     public function store(Request $request)
     {
         $request->validate([

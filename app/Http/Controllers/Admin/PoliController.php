@@ -19,8 +19,24 @@ class PoliController extends Controller
         return view('admin.polis.create');
     }
 
+    
     public function store(Request $request)
     {
+        
+    // 1. Validasi semua input yang dibutuhkan database
+    $request->validate([
+        'nama_poli' => 'required|string|max:255',
+        'keterangan' => 'nullable|string',
+        'deskripsi' => 'nullable|string'
+    ]);
+
+    // 2. Simpan ke database
+    // Menggunakan $request->all() pastikan properti $fillable di Model Poli sudah lengkap
+    \App\Models\Poli::create($request->all());
+
+    // 3. Redirect
+    return redirect()->route('polis.index')->with('success', 'Data Poli berhasil ditambahkan!');
+    
         // Validasi input dari form
         $request->validate([
             'nama_poli' => 'required|string|max:255',

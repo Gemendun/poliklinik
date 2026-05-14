@@ -75,13 +75,12 @@
                 </div>
 
                 {{-- Buttons --}}
-                <div class="flex gap-3">
-                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-primary 
-                               hover:bg-primary/90 text-white 
-                               font-semibold text-sm transition">
-                        <i class="fas fa-save mr-1"></i>
-                        Simpan
-                    </button>
+               <div class="flex gap-3">
+    <button type="submit" 
+            class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition shadow-md">
+        <i class="fas fa-save mr-1"></i>
+        Simpan
+    </button>
 
                     <a href="{{ route('obat.index') }}" class="px-6 py-2.5 rounded-xl bg-slate-100 
                               hover:bg-slate-200 text-slate-600 

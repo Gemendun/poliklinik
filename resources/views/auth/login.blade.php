@@ -1,13 +1,14 @@
 <x-layouts.guest title="Login">
 
-    <div class="card bg-base-100 shadow-2xl rounded-2xl w-full max-w-[420px]">
+    <div class="div class="card bg-white shadow-2xl rounded-2xl w-full max-w-[420px] border-slate-100">
         <div class="card-body my-2 p-[40px]">
 
             {{-- Logo & Title --}}
-            <div class="text-center mb-8">
-                <img src="{{ asset('images/logo-bengkot.png') }}"
-                    class="w-[60px] h-[60px] rounded-[16px] object-cover mx-auto mb-[14px] block">
-
+            <div class="card shadow-2xl rounded-2xl w-full max-w-[420px] !bg-white" style="background-color: white !important;">
+    <div class="card-body my-2 p-[40px]">
+        <div class="text-center mb-8">
+            <img src="{{ asset('images/logo-bengkot.png') }}"
+                class="w-[60px] h-[60px] rounded-[16px] object-cover mx-auto mb-[14px] block shadow-sm">
                 <h1 class="text-[1.5rem] font-extrabold text-[#1e2d6b] m-0 mb-[6px]">
                     Poliklinik
                 </h1>

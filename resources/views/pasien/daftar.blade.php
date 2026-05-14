@@ -67,17 +67,21 @@
                             </label>
 
                             <select name="id_jadwal" id="jadwalSelect" class="w-full border-2 rounded-lg p-2">
-                                <option value="">-- Pilih Jadwal --</option>
+    <option value="">-- Pilih Jadwal --</option>
 
-                                @foreach ($jadwals as $jadwal)
-                                <option value="{{ $jadwal->id }}" data-poli="{{ $jadwal->dokter->id_poli }}">
-                                    {{ $jadwal->hari }}
-                                    {{ $jadwal->jam_mulai }} - {{ $jadwal->jam_selesai }}
-                                    Dr. {{ $jadwal->dokter->nama ?? '--' }}
-                                </option>
-                                @endforeach
+    @foreach ($jadwals as $jadwal)
+        {{-- Kita ambil id_poli langsung dari relasi dokter --}}
+        @php
+            $idPoliDokter = $jadwal->dokter->id_poli ?? 0;
+        @endphp
+        
+        <option value="{{ $jadwal->id }}" data-poli="{{ $idPoliDokter }}">
+            {{ $jadwal->hari }} ({{ $jadwal->jam_mulai }} - {{ $jadwal->jam_selesai }}) 
+            - Dr. {{ $jadwal->dokter->nama ?? 'Tidak Diketahui' }}
+        </option>
+    @endforeach
+</select>
 
-                            </select>
                         </div>
 
                         {{-- Keluhan --}}
@@ -102,30 +106,35 @@
         </div>
     </div>
 
-    @push('scripts')
-    <script>
-        document.addEventListener("DOMContentLoaded", function(){
+@push('scripts')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const poliSelect = document.getElementById("poliSelect");
+        const jadwalSelect = document.getElementById("jadwalSelect");
+        const allOptions = Array.from(jadwalSelect.querySelectorAll("option"));
 
-    const poliSelect = document.getElementById("poliSelect")
-    const jadwalSelect = document.getElementById("jadwalSelect")
-    const jadwalOptions = jadwalSelect.querySelectorAll("option")
+        poliSelect.addEventListener("change", function() {
+            const selectedPoliId = this.value;
+            console.log("Poli dipilih:", selectedPoliId);
 
-    poliSelect.addEventListener("change", function(){
-        let poliId = this.value
-        jadwalOptions.forEach(option => {
-            if(option.value === ""){
-                option.style.display = "block"
-                return
-            }
-            if(option.dataset.poli === poliId){
-                option.style.display = "block"
-            }else{
-                option.style.display = "none"
-            }
-        })
-        jadwalSelect.value = ""
-    })
-        })
-    </script>
-    @endpush
+            jadwalSelect.innerHTML = "";
+
+            allOptions.forEach(option => {
+                const optionPoliId = option.getAttribute('data-poli');
+                
+                // Debugging: lihat ID poli di setiap opsi jadwal
+                if(option.value !== "") {
+                    console.log("Memeriksa Jadwal ID " + option.value + " dengan data-poli: " + optionPoliId);
+                }
+
+                if (option.value === "" || optionPoliId == selectedPoliId) {
+                    jadwalSelect.appendChild(option);
+                }
+            });
+
+            jadwalSelect.value = "";
+        });
+    });
+</script>
+@endpush
 </x-layouts.app>

@@ -6,13 +6,10 @@
             Data Obat
         </h2>
 
-        <a href="{{ route('obat.create') }}" class="inline-flex items-center gap-2 px-5 py-2.5 
-                  bg-primary hover:bg-primary/90 
-                  text-white text-sm font-semibold 
-                  rounded-xl transition">
-            <i class="fas fa-plus text-xs"></i>
-            Tambah Obat
-        </a>
+        <a href="{{ route('obat.create') }}" 
+   class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center shadow-sm transition-all">
+    <i class="fas fa-plus mr-2"></i> Tambah Obat
+</a>
     </div>
 
     {{-- Card --}}
